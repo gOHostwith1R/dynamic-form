@@ -20,7 +20,15 @@
     "url": "https://github.com/gOHostwith1R/dynamic-form/issues"
   },
   "homepage": "https://github.com/gOHostwith1R/dynamic-form#readme",
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "devDependencies": {
-    "concurrently": "^7.1.0"
+    "concurrently": "^7.1.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7"
+  },
+  "dependencies": {
+    "prettier": "^2.6.2"
   }
 }
