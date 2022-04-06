@@ -1,10 +1,24 @@
 import React from 'react';
+import './style.css';
 
-export const Select = ({ defaultValue, options, inputRef, onChange }) => (
-  <select name="pets" id="pet-select" ref={inputRef} onChange={onChange}>
+export const Select = ({
+  defaultValue,
+  options,
+  inputRef,
+  onChange,
+  disabled,
+}) => (
+  <select
+    ref={inputRef}
+    onChange={onChange}
+    disabled={disabled}
+    className="select"
+  >
     <option value="">{defaultValue}</option>
     {options.map(elem => (
-      <option value={elem}>{elem}</option>
+      <option value={elem.item} key={elem.key}>
+        {elem.item}
+      </option>
     ))}
   </select>
 );

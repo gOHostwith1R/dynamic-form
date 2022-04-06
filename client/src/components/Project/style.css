@@ -1,0 +1,20 @@
+.project {
+  padding: 20px;
+  background-color: #4287f5;
+  border-radius: 4px;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wrapper__image {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pen {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}

@@ -1,0 +1,13 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.field-array__container,
+.select__wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
