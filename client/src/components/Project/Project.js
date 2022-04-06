@@ -12,6 +12,7 @@ export const Project = ({ data, handleOpenEdit }) => {
     catName,
     dogName,
     textNotRequired,
+    selectNotRequired,
     item,
   } = data;
   return (
@@ -31,7 +32,10 @@ export const Project = ({ data, handleOpenEdit }) => {
       <p>Cat name: {catName}</p>
       <p>Dog Name: {dogName}</p>
       <div>
-        Additional information: {textNotRequired}
+        Additional information:{' '}
+        {`${textNotRequired === null ? '' : textNotRequired} ${
+          textNotRequired === null || selectNotRequired === null ? '' : 'and'
+        } ${selectNotRequired === null ? '' : selectNotRequired}`}
         {item.length !== 0 && item.map(elem => <p>{elem.name}</p>)}
       </div>
     </div>

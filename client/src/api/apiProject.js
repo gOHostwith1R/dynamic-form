@@ -5,4 +5,6 @@ export const apiProject = {
     axios.post(process.env.REACT_APP_SERVER_URL + 'create', { data }),
   apiFetchAllProject: () =>
     axios.get(process.env.REACT_APP_SERVER_URL + 'projects'),
+  apiEditProject: (id, data) =>
+    axios.post(process.env.REACT_APP_SERVER_URL + 'edit', { id, data }),
 };

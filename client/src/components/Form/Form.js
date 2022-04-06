@@ -24,8 +24,21 @@ const selectValues = [
   { item: 5, key: 11 },
 ];
 
+const defaultValues = {
+  name: '',
+  title: '',
+  subtitle: '',
+  type: '',
+  catName: '',
+  dogName: '',
+  notice: '',
+  textNotRequired: '',
+  selectNotRequired: '',
+  item: [],
+};
+
 export const Form = ({ onSubmit }) => {
-  const { control, handleSubmit, watch } = useForm();
+  const { control, handleSubmit, watch } = useForm({ defaultValues });
   const watchFields = watch(['radioTextButton', 'radioSelectButton']);
   const { fields, append, remove } = useFieldArray({
     control,

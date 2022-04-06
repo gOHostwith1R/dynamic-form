@@ -23,7 +23,6 @@ class ProjectService {
       catName,
       dogName,
       notice,
-      item,
       textNotRequired,
       selectNotRequired,
       item,
@@ -31,6 +30,9 @@ class ProjectService {
   }
   async getAllProjects() {
     return await Project.findAll();
+  }
+  async editProject(id, data) {
+    return (await Project.findByPk(id)).update(data);
   }
 }
 
