@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { apiProject } from '../../api/apiProject';
-import { Project } from '../../components';
+import { Modal, Project } from '../../components';
 import './style.css';
 
 export const MainPage = () => {
@@ -11,14 +11,16 @@ export const MainPage = () => {
   }, []);
   const handleOpenEdit = id => {
     setOpen(true);
-    console.log(id);
   };
-  console.log(projects);
+  const handleCloseEdit = () => {
+    setOpen(false);
+  };
   return (
     <div className="main">
       {projects.map((elem, index) => (
         <Project data={elem} key={index} handleOpenEdit={handleOpenEdit} />
       ))}
+      {open && <Modal handleCloseEdit={handleCloseEdit} />}
     </div>
   );
 };
