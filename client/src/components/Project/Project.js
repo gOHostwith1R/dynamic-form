@@ -36,7 +36,9 @@ export const Project = ({ data, handleOpenEdit }) => {
         {`${textNotRequired === null ? '' : textNotRequired} ${
           textNotRequired === null || selectNotRequired === null ? '' : 'and'
         } ${selectNotRequired === null ? '' : selectNotRequired}`}
-        {item.length !== 0 && item.map(elem => <p>{elem.name}</p>)}
+        {item !== null &&
+          item.length !== 0 &&
+          item.map(elem => <p>{elem.name}</p>)}
       </div>
     </div>
   );

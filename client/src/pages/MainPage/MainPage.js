@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { apiProject } from '../../api/apiProject';
 import { Modal, Project } from '../../components';
 import './style.css';
+import { validateForm } from '../../helpers/validateForm';
 
 export const MainPage = () => {
   const [projects, setProjects] = useState([]);
@@ -19,21 +20,8 @@ export const MainPage = () => {
   };
 
   const onSubmit = data => {
-    let filteredObj = {};
-    for (const [key, value] of Object.entries(data)) {
-      if (value !== '' && value !== undefined && value.length !== 0) {
-        if (Array.isArray(value)) {
-          value.forEach(elem => {
-            if (elem.name !== '') {
-              return (filteredObj[key] = value);
-            }
-          });
-        } else {
-          filteredObj[key] = value;
-        }
-      }
-    }
-    apiProject.apiEditProject(id, filteredObj);
+    const validateData = validateForm(data);
+    apiProject.apiEditProject(id, validateData);
     apiProject.apiFetchAllProject().then(data => setProjects(data.data));
   };
 

@@ -3,26 +3,19 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { Input } from '../Input';
 import { Select } from '../Select';
 import { Button } from '../Button';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { nameCats, nameDogs, selectValues } from '../../constants/constants';
+import { Paragraph } from '../Paragraph';
 
-const nameCats = [
-  { item: 'Cat 1', key: 0 },
-  { item: 'Cat 2', key: 3 },
-  { item: 'Cat 3', key: 1 },
-  { item: 'Cat 4', key: 2 },
-];
-const nameDogs = [
-  { item: 'Dog 1', key: 4 },
-  { item: 'Dog 2', key: 5 },
-  { item: 'Dog 3', key: 7 },
-  { item: 'Dog 4', key: 6 },
-];
-const selectValues = [
-  { item: 1, key: 8 },
-  { item: 2, key: 9 },
-  { item: 3, key: 12 },
-  { item: 4, key: 10 },
-  { item: 5, key: 11 },
-];
+const schema = yup
+  .object()
+  .shape({
+    name: yup.string().required(),
+    type: yup.string().max(6),
+    catName: yup.string().required(),
+  })
+  .required();
 
 const defaultValues = {
   name: '',
@@ -38,7 +31,15 @@ const defaultValues = {
 };
 
 export const Form = ({ onSubmit }) => {
-  const { control, handleSubmit, watch } = useForm({ defaultValues });
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues,
+    resolver: yupResolver(schema),
+  });
   const watchFields = watch(['radioTextButton', 'radioSelectButton']);
   const { fields, append, remove } = useFieldArray({
     control,
@@ -47,18 +48,21 @@ export const Form = ({ onSubmit }) => {
   });
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
-      <Controller
-        name="name"
-        control={control}
-        render={({ field: { ref, onChange } }) => (
-          <Input
-            type="text"
-            inputRef={ref}
-            onChange={onChange}
-            placeholder="Enter your name"
-          />
-        )}
-      />
+      <div>
+        <Controller
+          name="name"
+          control={control}
+          render={({ field: { ref, onChange } }) => (
+            <Input
+              type="text"
+              inputRef={ref}
+              onChange={onChange}
+              placeholder="Enter your name"
+            />
+          )}
+        />
+        {errors.name && <Paragraph>{errors.name.message}</Paragraph>}
+      </div>
       <Controller
         name="title"
         control={control}
@@ -83,31 +87,37 @@ export const Form = ({ onSubmit }) => {
           />
         )}
       />
-      <Controller
-        name="type"
-        control={control}
-        render={({ field: { ref, onChange } }) => (
-          <Input
-            type="text"
-            inputRef={ref}
-            onChange={onChange}
-            placeholder="Enter the type"
-          />
-        )}
-      />
-      <div className="select__wrapper">
+      <div>
         <Controller
-          name="catName"
+          name="type"
           control={control}
           render={({ field: { ref, onChange } }) => (
-            <Select
+            <Input
+              type="text"
               inputRef={ref}
               onChange={onChange}
-              defaultValue="Choose a cat name"
-              options={nameCats}
+              placeholder="Enter the type"
             />
           )}
         />
+        {errors.type && <Paragraph>{errors.type.message}</Paragraph>}
+      </div>
+      <div className="select__wrapper">
+        <div>
+          <Controller
+            name="catName"
+            control={control}
+            render={({ field: { ref, onChange } }) => (
+              <Select
+                inputRef={ref}
+                onChange={onChange}
+                defaultValue="Choose a cat name"
+                options={nameCats}
+              />
+            )}
+          />
+          {errors.catName && <Paragraph>{errors.catName.message}</Paragraph>}
+        </div>
         <Controller
           name="dogName"
           control={control}
