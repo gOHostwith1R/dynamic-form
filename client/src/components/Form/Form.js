@@ -35,7 +35,7 @@ export const Form = ({ onSubmit }) => {
     control,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, touchedFields },
   } = useForm({
     defaultValues,
     resolver: yupResolver(schema),

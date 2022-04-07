@@ -3,6 +3,7 @@ import { apiProject } from '../../api/apiProject';
 import { Modal, Project } from '../../components';
 import './style.css';
 import { validateForm } from '../../helpers/validateForm';
+import { Link } from 'react-router-dom';
 
 export const MainPage = () => {
   const [projects, setProjects] = useState([]);
@@ -27,12 +28,19 @@ export const MainPage = () => {
 
   return (
     <div className="main">
-      {projects.map((elem, index) => (
-        <Project data={elem} key={index} handleOpenEdit={handleOpenEdit} />
-      ))}
-      {open && (
-        <Modal handleCloseEdit={handleCloseEdit} id={id} onSubmit={onSubmit} />
-      )}
+      <Link to="/create">Create Project</Link>
+      <div className="project__wrapper">
+        {projects.map((elem, index) => (
+          <Project data={elem} key={index} handleOpenEdit={handleOpenEdit} />
+        ))}
+        {open && (
+          <Modal
+            handleCloseEdit={handleCloseEdit}
+            id={id}
+            onSubmit={onSubmit}
+          />
+        )}
+      </div>
     </div>
   );
 };
